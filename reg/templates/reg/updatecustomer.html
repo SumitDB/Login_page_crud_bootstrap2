@@ -5,11 +5,11 @@
 <div class="jumbotron jumbotron-fluid jumbo-color">
     <div class="container">
         <br>
-        <h1 class="text-center display-4 font-weight-bold">Update Customer Information {{id}}</h1>
+        <h1 class="text-center display-4 font-weight-bold">Update Customer Information</h1>
         <h6 class="lead text-center">
             {% if messages %}
             {% for message in messages %}
-            <div {% if message.tags %} class="{{ messages.tags}}" {% endif %}>
+            <div {% if message.tags %} class="{{ messages.tags}} text-warning" {% endif %}>
                 {{message}}
             </div>
             {% endfor %}
@@ -17,7 +17,7 @@
         </h6>
         <br>
         <div class="col-sm-8 offset-2">
-            <form action="/update/{{id}}" menthod="post">
+            <form action="{% url 'updatedata' id %}" method="post">
                 {% csrf_token %}
                 {{formm.as_p}}
                 <input type="submit" class="btn btnnn" value="Update">

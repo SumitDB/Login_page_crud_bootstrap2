@@ -1,4 +1,5 @@
 
+from email import message
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
@@ -7,8 +8,9 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from reg.models import Customer, Employee 
-# Create your views here.
 
+
+# Create your views here.
 def Sign_up(request):
     if request.method == 'POST':
         fm= SignUpForm(request.POST)
@@ -19,7 +21,7 @@ def Sign_up(request):
         fm = SignUpForm()
     return render (request, 'reg/signup.html',{'form':fm})
 
-
+ 
 #Login View
 def User_login(request):
     if  not request.user.is_authenticated:
@@ -131,6 +133,7 @@ def show(request):
     else:
         return HttpResponseRedirect('/login/')
 
+
 #edit edit
 def edit(request,id):
     employee = Employee.objects.get(id=id)
@@ -141,9 +144,12 @@ def edit(request,id):
 def update(request,id):
     employee = Employee.objects.get(id=id)
     form = EmployeeForm(request.POST, instance=employee)
+    
     if form.is_valid():
         form.save()
+        messages.success(request,'You have successfully edited the customer !!')
         return render(request, 'reg/updatecustomer.html',{'formm':form, 'id':id})
+
 #delete
 def destroy(request,id):
     employee = Employee.objects.get(id=id)
