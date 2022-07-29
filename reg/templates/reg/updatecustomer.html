@@ -1,0 +1,29 @@
+{% extends 'reg/base.html' %}
+{% block content %}
+
+
+<div class="jumbotron jumbotron-fluid jumbo-color">
+    <div class="container">
+        <br>
+        <h1 class="text-center display-4 font-weight-bold">Update Customer Information {{id}}</h1>
+        <h6 class="lead text-center">
+            {% if messages %}
+            {% for message in messages %}
+            <div {% if message.tags %} class="{{ messages.tags}}" {% endif %}>
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+        </h6>
+        <br>
+        <div class="col-sm-8 offset-2">
+            <form action="/update/{{id}}" menthod="post">
+                {% csrf_token %}
+                {{formm.as_p}}
+                <input type="submit" class="btn btnnn" value="Update">
+            </form>
+            <br>
+            <br>
+        </div>
+        </div>
+        {% endblock content %}
